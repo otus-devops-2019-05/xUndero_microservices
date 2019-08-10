@@ -1,0 +1,38 @@
+---
+- name: Install Docker
+  hosts: default
+  become: true
+  tasks:
+    - name: Install a list of packages
+      apt:
+        name: "{{ packages }}"
+      vars:
+        packages:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg-agent
+          - software-properties-common
+
+    - name: Add Docker's official GPG key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker's Repo
+      apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename|lower }} stable"
+        state: present
+
+    - name: Run the equivalent of "apt-get update" as a separate step
+      apt:
+        update_cache: yes
+
+    - name: Install Docker
+      apt:
+        name: "{{ packages }}"
+      vars:
+        packages:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io

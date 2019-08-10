@@ -1,0 +1,23 @@
+---
+- name: Start Docker
+  hosts: docker
+  become: true
+  tasks:
+    - name: install pip
+      apt:
+        name: python-pip
+
+    - name: install pip docker
+      pip:
+        name: docker
+
+    - name: pull an image
+      docker_image:
+        name: xunder/otus-reddit:1.0
+
+    - name: Start container
+      docker_container:
+        name: reddit
+        image: xunder/otus-reddit:1.0
+        ports:
+          - "9292:9292"
