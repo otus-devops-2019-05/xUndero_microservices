@@ -1,4 +1,16 @@
 # xUndero_microservices [![Build Status](https://travis-ci.com/otus-devops-2019-05/xUndero_microservices.svg?branch=master)](https://travis-ci.com/otus-devops-2019-05/xUndero_microservices)
+## ДЗ №14 docker-4
+1. #### Работа с сетями в Docker
+
+2. #### docker-compose:
+  * Установка docker-compose;
+  * Изучение возможностей docker-compose:  
+Переменные окружения подставлены в файл *`.env`*,
+там-же указано имя проекта.
+
+3. #### Самостоятельное задание:
+Создан файл *`docker-compose.override.yml`* соответствующий заданным параметрам.
+
 ## ДЗ №13 docker-3
 1. #### Docker-образы, микросервисы:
   * Создание структуры каталогов - микросервисов;
@@ -18,7 +30,6 @@
 правда пришлось добавить строку для установки gcc: *`RUN apk --no-cache update && apk add --no-cache gcc=5.3.0-r0 libc-dev=0.7-r0`*
 
 5. #### Создание volume для хранения данных.
-
 
 ## ДЗ №12 docker-2
 1. #### Введение в Docker:
