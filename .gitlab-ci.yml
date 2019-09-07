@@ -16,7 +16,7 @@ before_script:
 build_job:
   stage: build
   script:
-    - cat ./gitlab/Dockerfile | docker build -t xunder/reddit:2.0 -
+    - docker build -t xunder/reddit:2.0 .
 
 #test_unit_job: 
 #  stage: test 
