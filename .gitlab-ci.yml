@@ -1,4 +1,8 @@
-image: docker:stable
+image: docker:19.03.1
+
+services:
+  - docker:19.03.1-dind
+
 stages:
   - build
 
