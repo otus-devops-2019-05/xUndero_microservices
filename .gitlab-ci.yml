@@ -1,7 +1,7 @@
 image: docker:19.03.1
 
 variables:
-  DOCKER_HOST: tcp://docker:2376/
+  DOCKER_HOST: tcp://localhost:2376/
 
 services:
   - docker:19.03.1-dind
