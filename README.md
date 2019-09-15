@@ -1,4 +1,12 @@
 # xUndero_microservices [![Build Status](https://travis-ci.com/otus-devops-2019-05/xUndero_microservices.svg?branch=master)](https://travis-ci.com/otus-devops-2019-05/xUndero_microservices)
+## ДЗ №15 gitlab-ci-1
+1. Инсталляция Gitlab-CI
+  * Для создания сервера использовался docker-machine
+  * Для подготовки и запуска Gitlab-CI - ansible
+2. Подготовка репозитория
+3. Описание этапов пайплайна
+4. Определение окружений
+
 ## ДЗ №14 docker-4
 1. #### Работа с сетями в Docker
 
