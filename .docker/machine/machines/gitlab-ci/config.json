@@ -5,8 +5,8 @@
         "MachineName": "gitlab-ci",
         "SSHUser": "docker-user",
         "SSHPort": 22,
-        "SSHKeyPath": "/home/xunder/.docker/machine/machines/gitlab-ci/id_rsa",
-        "StorePath": "/home/xunder/.docker/machine",
+        "SSHKeyPath": "~/.docker/machine/machines/gitlab-ci/id_rsa",
+        "StorePath": "~/.docker/machine",
         "SwarmMaster": false,
         "SwarmHost": "tcp://0.0.0.0:3376",
         "SwarmDiscovery": "",
@@ -64,18 +64,18 @@
             "IsExperimental": false
         },
         "AuthOptions": {
-            "CertDir": "/home/xunder/.docker/machine/certs",
-            "CaCertPath": "/home/xunder/.docker/machine/certs/ca.pem",
-            "CaPrivateKeyPath": "/home/xunder/.docker/machine/certs/ca-key.pem",
+            "CertDir": "~/.docker/machine/certs",
+            "CaCertPath": "~/.docker/machine/certs/ca.pem",
+            "CaPrivateKeyPath": "~/.docker/machine/certs/ca-key.pem",
             "CaCertRemotePath": "",
-            "ServerCertPath": "/home/xunder/.docker/machine/machines/gitlab-ci/server.pem",
-            "ServerKeyPath": "/home/xunder/.docker/machine/machines/gitlab-ci/server-key.pem",
-            "ClientKeyPath": "/home/xunder/.docker/machine/certs/key.pem",
+            "ServerCertPath": "~/.docker/machine/machines/gitlab-ci/server.pem",
+            "ServerKeyPath": "~/.docker/machine/machines/gitlab-ci/server-key.pem",
+            "ClientKeyPath": "~/.docker/machine/certs/key.pem",
             "ServerCertRemotePath": "",
             "ServerKeyRemotePath": "",
-            "ClientCertPath": "/home/xunder/.docker/machine/certs/cert.pem",
+            "ClientCertPath": "~/.docker/machine/certs/cert.pem",
             "ServerCertSANs": [],
-            "StorePath": "/home/xunder/.docker/machine/machines/gitlab-ci"
+            "StorePath": "~/.docker/machine/machines/gitlab-ci"
         }
     },
     "Name": "gitlab-ci"
