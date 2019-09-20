@@ -12,11 +12,5 @@ RUN apt-get update \
 #RUN echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.2 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.2.list
 #RUN apt-get update && apt-get install -y mongodb-org
 
-#RUN git clone -b monolith https://github.com/express42/reddit.git
-#RUN cd /reddit && bundle install
-
-#RUN bundle update --bundler && bundle install
-
-#ENTRYPOINT bundle exec cap production deploy:initial
 WORKDIR /reddit
 CMD service mongodb start && puma
