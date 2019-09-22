@@ -1,0 +1,31 @@
+---
+- name: Prepare Gitlab
+  hosts: gitlab
+  become: true
+  tasks:
+    - name: Create a directories
+      file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - /srv/gitlab/config
+        - /srv/gitlab/data
+        - /srv/gitlab/logs
+
+    - name: Copy file
+      template:
+        src: ./templates/docker-compose.j2
+        dest: /srv/gitlab/docker-compose.yml
+
+    - name: Update repositories cache and install package
+      apt:
+        name: docker-compose
+        update_cache: yes
+
+    - name: Create and start services
+      docker_compose:
+        project_src: /srv/gitlab/
+      register: output
+
+    - debug:
+        var: output
