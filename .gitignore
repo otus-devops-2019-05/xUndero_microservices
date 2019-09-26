@@ -13,3 +13,4 @@ jdauphant.nginx
 .cache
 .pytest_cache
 virtualenv_dir
+.env
