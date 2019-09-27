@@ -1,4 +1,13 @@
 # xUndero_microservices [![Build Status](https://travis-ci.com/otus-devops-2019-05/xUndero_microservices.svg?branch=master)](https://travis-ci.com/otus-devops-2019-05/xUndero_microservices)
+## ДЗ 16 monitoring-1
+1. #### Prometheus, запуск и знакомство;
+2. #### Настройка и проверка сбора метрик;
+  * Созданные в процессе работы образы в репозитории https://hub.docker.com/u/xunder 
+3. #### Самостоятельное задание:
+  * Для мониторинга MongoDB из проекта percona/mongodb_exporter собран образ xunder/mongodb_exporter:1.0
+  * Для blackbox использовался образ prom/blackbox-exporter:v0.15.1
+  * Создан Makefile.
+
 ## ДЗ №15 gitlab-ci-1
 1. #### Инсталляция Gitlab-CI
   * Для создания сервера использовался docker-machine
