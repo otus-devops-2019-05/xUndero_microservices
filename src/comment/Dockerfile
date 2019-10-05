@@ -1,5 +1,5 @@
 FROM alpine:3.10.1
-RUN apk --no-cache update && apk add --no-cache ruby-full ruby-dev build-base && gem install bundler:1.17.2 --no-ri --no-rdoc
+RUN apk --no-cache update && apk add --no-cache ruby-full ruby-dev build-base && gem install bundler:1.17.2 tzinfo-data:1.2019.3 --no-ri --no-rdoc
 
 ENV APP_HOME /app
 RUN mkdir $APP_HOME
