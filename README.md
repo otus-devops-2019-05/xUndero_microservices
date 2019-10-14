@@ -1,4 +1,9 @@
 # xUndero_microservices [![Build Status](https://travis-ci.com/otus-devops-2019-05/xUndero_microservices.svg?branch=master)](https://travis-ci.com/otus-devops-2019-05/xUndero_microservices)
+## ДЗ 18 logging-1
+1. #### Подготовка стека EFK;
+2. #### Структурированные и неструктурированные логи в интерфейсе Kibana;
+3. #### Проверка трейсинга на основе Zipkin.
+
 ## ДЗ 17 monitoring-2
 1. #### Мониторинг docker образов - cAdvisor;
 2. #### Визуализация мониторинга - Grafana;
