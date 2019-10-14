@@ -1,4 +1,10 @@
 # xUndero_microservices [![Build Status](https://travis-ci.com/otus-devops-2019-05/xUndero_microservices.svg?branch=master)](https://travis-ci.com/otus-devops-2019-05/xUndero_microservices)
+## ДЗ 17 monitoring-2
+1. #### Мониторинг docker образов - cAdvisor;
+2. #### Визуализация мониторинга - Grafana;
+3. #### Алертинг.
+  * Созданные в процессе работы образы в репозитории https://hub.docker.com/u/xunder 
+
 ## ДЗ 16 monitoring-1
 1. #### Prometheus, запуск и знакомство;
 2. #### Настройка и проверка сбора метрик;

@@ -14,3 +14,4 @@ jdauphant.nginx
 .pytest_cache
 virtualenv_dir
 .env
+makefiles
