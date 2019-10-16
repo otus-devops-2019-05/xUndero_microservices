@@ -1,0 +1,135 @@
+---
+- name: Bootstrap workers
+  hosts: workers
+  become: true
+  tasks:
+    - name: Update repositories cache and install package
+      apt:
+        name: {{ item }}
+        update_cache: yes
+      with_items:
+        - socat
+        - conntrack
+        - ipset
+
+    - name: Create a directories
+      file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - /etc/cni/net.d
+        - /opt/cni/bin
+        - /var/lib/kubelet
+        - /var/lib/kube-proxy
+        - /var/lib/kubernetes
+        - /var/run/kubernetes
+        - /etc/containerd/
+
+    - name: Download & unarchive crictl
+      unarchive:
+        src: https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.15.0/crictl-v1.15.0-linux-amd64.tar.gz
+        dest: /usr/local/bin/
+        remote_src: yes
+
+    - name: Download & unarchive cni
+      unarchive:
+        src: https://github.com/containernetworking/plugins/releases/download/v0.8.1/cni-plugins-linux-amd64-v0.8.1.tgz
+        dest: /opt/cni/bin/
+        remote_src: yes
+
+    - name: Download & unarchive containerd
+      unarchive:
+        src: https://github.com/containerd/containerd/releases/download/v1.2.7/containerd-1.2.7.linux-amd64.tar.gz
+        dest: /
+        remote_src: yes
+
+    - name: Download files
+      get_url:
+        url: "https://storage.googleapis.com/kubernetes-release/release/v1.15.0/bin/linux/amd64/{{ item }}"
+        dest: /usr/local/bin/
+        mode: '0755'
+        remote_src: yes
+      with_items:
+        - kubelet
+        - kube-proxy
+        - kubectl
+
+    - name: Download runc
+      get_url:
+        url: https://github.com/opencontainers/runc/releases/download/v1.0.0-rc8/runc.amd64
+        dest: /usr/local/bin/runc
+        mode: '0755'
+        remote_src: yes
+
+    - name: Download runsc
+      get_url:
+        url: https://storage.googleapis.com/kubernetes-the-hard-way/runsc-50c283b9f56bb7200938d9e207355f05f79f0d17
+        dest: /usr/local/bin/runsc
+        mode: '0755'
+        remote_src: yes
+
+    - name: Copy files-1
+      copy:
+        src: "./files/{{ item }}"
+        dest: /etc/cni/net.d/
+      with_items:
+        - 10-bridge.conf
+        - 99-loopback.conf
+
+    - name: Copy file-2
+      copy:
+        src: ./files/config.toml
+        dest: /etc/containerd/
+
+    - name: Copy files-3
+      copy:
+        src: "../the_hard_way/{{ item }}"
+        dest: /var/lib/kubelet/
+      with_items:
+        - {{ ansible_hostname }}-key.pem
+        - {{ ansible_hostname }}.pem
+
+    - name: Copy file-4
+      copy:
+        src: "../the_hard_way/{{ ansible_hostname }}.kubeconfig"
+        dest: /var/lib/kubelet/kubeconfig
+
+    - name: Copy file-5
+      copy:
+        src: ../the_hard_way/ca.pem
+        dest: /var/lib/kubernetes/
+
+    - name: Copy file-6
+      template:
+        src: ./files/kubelet-config.yaml.j2
+        dest: /var/lib/kubelet/kubelet-config.yaml
+
+    - name: Copy file-7
+      copy:
+        src: ../the_hard_way/kube-proxy.kubeconfig
+        dest: /var/lib/kube-proxy/kubeconfig/
+
+    - name: Copy file-8
+      copy:
+        src: ./files/kube-proxy-config.yaml
+        dest: /var/lib/kube-proxy/
+
+    - name: Copy service files
+      copy:
+        src: "./files/{{ item }}"
+        dest: /etc/systemd/system/
+      with_items:
+        - containerd.service
+        - kubelet.service
+        - kube-proxy.service
+
+    - name: Start service, also issue daemon-reload to pick up config changes
+      systemd:
+        name: {{ item }}
+        enabled: yes
+        state: started
+        daemon_reload: yes
+      with_items:
+        - containerd
+        - kubelet
+        - kube-proxy

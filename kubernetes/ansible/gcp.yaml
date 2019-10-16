@@ -1,0 +1,15 @@
+plugin: gcp_compute
+projects:
+  - docker-249114
+auth_kind: serviceaccount
+service_account_file: ~/docker-249114-52b2e5b226af.json
+scopes:
+  - 'https://www.googleapis.com/auth/compute.readonly'
+hostnames:
+  - name
+groups:
+  controllers: "'controller' in name"
+  workers: "'worker' in name"
+compose:
+  ansible_host: networkInterfaces[0].accessConfigs[0].natIP
+  internal_ip: networkInterfaces[0].networkIP

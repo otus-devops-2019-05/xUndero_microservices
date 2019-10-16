@@ -1,0 +1,39 @@
+---
+- name: Bootstrap etcd
+  hosts: controllers
+  become: true
+  tasks:
+    - name: Download & unarchive files
+      unarchive:
+        src: https://github.com/coreos/etcd/releases/download/v3.3.13/etcd-v3.3.13-linux-amd64.tar.gz
+        dest: /usr/local/bin/
+        remote_src: yes
+
+    - name: Create a directories
+      file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - /etc/etcd
+        - /var/lib/etcd
+
+    - name: Copy certificates
+      copy:
+        src: "../the_hard_way/{{ item }}"
+        dest: /etc/etcd/
+      with_items:
+        - ca.pem
+        - kubernetes-key.pem
+        - kubernetes.pem
+
+    - name: Copy service file
+      template:
+        src: ./templates/etcd.service.j2
+        dest: /etc/systemd/system/etcd.service
+
+    - name: Start service, also issue daemon-reload to pick up config changes
+      systemd:
+        name: etcd
+        enabled: yes
+        state: started
+        daemon_reload: yes
