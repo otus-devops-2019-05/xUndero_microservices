@@ -1,0 +1,26 @@
+---
+- name: Enable HTTP Health Checks
+  hosts: controllers
+  become: true
+  tasks:
+    - name: Update repositories cache and install package
+      apt:
+        name: nginx
+        update_cache: yes
+
+    - name: Copy file
+      copy:
+        src: ./files/kubernetes.default.svc.cluster.local
+        dest: /etc/nginx/sites-available/
+
+    - name: Create a symbolic link
+      file:
+        src: /etc/nginx/sites-available/kubernetes.default.svc.cluster.local
+        dest: /etc/nginx/sites-enabled/
+        state: link
+
+    - name: restart & enable nginx                                                                          
+      systemd:
+        state: restarted
+        enabled: yes
+        name: nginx

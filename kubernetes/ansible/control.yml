@@ -1,0 +1,64 @@
+---
+- name: Bootstrap control plane
+  hosts: controllers
+  become: true
+  tasks:
+    - name: Create a directories
+      file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - /etc/kubernetes/config
+        - /var/lib/kubernetes
+
+    - name: Download files
+      get_url:
+        url: "https://storage.googleapis.com/kubernetes-release/release/v1.15.0/bin/linux/amd64/{{ item }}"
+        dest: /usr/local/bin/
+        mode: '0755'
+        remote_src: yes
+      with_items:
+        - kube-apiserver
+        - kube-controller-manager
+        - kube-scheduler
+        - kubectl
+
+    - name: Copy files
+      copy:
+        src: "../the_hard_way/{{ item }}"
+        dest: /var/lib/kubernetes/
+      with_items:
+        - ca.pem
+        - ca-key.pem
+        - kubernetes-key.pem
+        - kubernetes.pem 
+        - service-account-key.pem
+        - service-account.pem
+        - encryption-config.yaml
+        - kube-controller-manager.kubeconfig
+        - kube-scheduler.kubeconfig
+
+    - name: Copy 1 file
+      copy:
+        src: ./files/kube-scheduler.yaml
+        dest: /etc/kubernetes/config/kube-scheduler.yaml
+
+    - name: Copy service file
+      template:
+        src: "./templates/{{ item }}.service.j2"
+        dest: "/etc/systemd/system/{{ item }}.service"
+      with_items:
+        - kube-apiserver
+        - kube-controller-manager
+        - kube-scheduler
+
+    - name: Start service, also issue daemon-reload to pick up config changes
+      systemd:
+        name: {{ item }}
+        enabled: yes
+        state: started
+        daemon_reload: yes
+      with_items:
+        - kube-apiserver
+        - kube-controller-manager
+        - kube-scheduler

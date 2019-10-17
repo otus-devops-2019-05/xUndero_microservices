@@ -1,4 +1,9 @@
 # xUndero_microservices [![Build Status](https://travis-ci.com/otus-devops-2019-05/xUndero_microservices.svg?branch=master)](https://travis-ci.com/otus-devops-2019-05/xUndero_microservices)
+## ДЗ 19 kubernetes-1
+1. #### Знакомство с k8s, развёртывание с помощью the_hard_way;
+2. #### Самостоятельное задание:
+  * Некоторые этапы развёртывания описаны с помощью Ansible.
+
 ## ДЗ 18 logging-1
 1. #### Подготовка стека EFK;
 2. #### Структурированные и неструктурированные логи в интерфейсе Kibana;
