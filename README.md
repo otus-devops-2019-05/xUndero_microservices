@@ -1,4 +1,15 @@
 # xUndero_microservices [![Build Status](https://travis-ci.com/otus-devops-2019-05/xUndero_microservices.svg?branch=master)](https://travis-ci.com/otus-devops-2019-05/xUndero_microservices)
+## ДЗ 20 kubernetes-2
+1. #### Знакомство с локальным k8s, развёртывание с помощью minikube;
+  * Правда для доступа к Dashboard пришлось создать сервис NodePort и пробрость порт 9090
+2. #### Создание кластера в GKE;
+  * Кластер создал и запустил приложение: *`kubectl apply -f ./kubernetes/reddit/ -n dev`*
+  * Приложение было доступно по адресу *`http://34.77.32.0:31047/`*
+3. #### Самостоятельное задание:
+  * Создал кластер с помощью terraform.(правда terraform крашится, но кластер создаётся и работает)
+  * и как подсказал Василий для доступа к Dashboard используется ссылка:  
+  *`http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login`*
+
 ## ДЗ 19 kubernetes-1
 1. #### Знакомство с k8s, развёртывание с помощью the_hard_way;
 2. #### Самостоятельное задание:
