@@ -2,23 +2,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ui
+  name: post
   labels:
     app: reddit
-    component: ui
+    component: post
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: reddit
-      component: ui
+      component: post
   template:
     metadata:
-      name: ui-pod
+      name: post-pod
       labels:
         app: reddit
-        component: ui
+        component: post
     spec:
       containers:
-      - image: xunder/ui
-        name: ui
+      - image: xunder/post
+        name: post

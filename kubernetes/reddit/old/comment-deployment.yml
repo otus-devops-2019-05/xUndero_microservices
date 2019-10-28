@@ -2,23 +2,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ui
+  name: comment
   labels:
     app: reddit
-    component: ui
+    component: comment
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: reddit
-      component: ui
+      component: comment
   template:
     metadata:
-      name: ui-pod
+      name: comment
       labels:
         app: reddit
-        component: ui
+        component: comment
     spec:
       containers:
-      - image: xunder/ui
-        name: ui
+      - image: xunder/comment
+        name: comment
