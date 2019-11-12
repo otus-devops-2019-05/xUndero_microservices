@@ -1,4 +1,15 @@
 # xUndero_microservices [![Build Status](https://travis-ci.com/otus-devops-2019-05/xUndero_microservices.svg?branch=master)](https://travis-ci.com/otus-devops-2019-05/xUndero_microservices)
+## ДЗ 21 kubernetes-3
+1. #### Изучение сетевого взаимодействия k8s:
+  * Service (ClusterIP, NodePort, LoadBalanser);
+  * Ingress (TLS);
+  * Задание со*: для создания манифеста для объекта Secret использовалась команда:  
+    *`kubectl get secret ui-ingress -o yaml > ./tls-secret.yml`*
+
+2. #### NetworkPopicy;
+3. #### Подключение системы хранения;
+  * Volume, PersistentVolume, PersistentVolumeClaim
+
 ## ДЗ 20 kubernetes-2
 1. #### Знакомство с локальным k8s, развёртывание с помощью minikube;
   * Правда для доступа к Dashboard пришлось создать сервис NodePort и пробрость порт 9090
