@@ -3,15 +3,24 @@ terraform {
 }
 
 provider "google" {
-  version = "2.5.0"
+  version = "~> 2.18"
   project = "${var.project}"
   region  = "${var.region}"
+}
+
+resource "google_compute_disk" "default" {
+  name = "reddit-mongo-disk"
+  zone = "${var.zone}"
+  size = 25
+  labels = {
+    environment = "dev"
+  }
 }
 
 resource "google_container_cluster" "primary" {
   name               = "my-cluster"
   location           = "${var.zone}"
-  initial_node_count = 2
+  initial_node_count = 3
 
   master_auth {
     username = ""
@@ -20,6 +29,17 @@ resource "google_container_cluster" "primary" {
     client_certificate_config {
       issue_client_certificate = false
     }
+  }
+
+  addons_config {
+    network_policy_config {
+      disabled = false
+    }
+  }
+
+  network_policy {
+    enabled  = true
+    provider = "CALICO"
   }
 
   node_config {
