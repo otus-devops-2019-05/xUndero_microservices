@@ -1,0 +1,21 @@
+comment:
+  image:
+    repository: xunder/comment
+    tag: latest
+  service:
+    externalPort: 9292
+
+post:
+  image:
+    repository: xunder/post
+    tag: latest
+  service:
+    externalPort: 5000
+
+ui:
+  image:
+    repository: xunder/ui
+    tag: latest
+  service:
+    externalPort: 9292
+

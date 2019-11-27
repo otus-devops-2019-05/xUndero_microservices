@@ -1,0 +1,7 @@
+name: reddit
+version: 1.0.0
+description: OTUS reddit application REDDIT
+maintainers:
+  - name: xUnder
+    email: xundero@mail.ru
+apiVersion: v1

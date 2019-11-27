@@ -8,19 +8,20 @@ provider "google" {
   region  = "${var.region}"
 }
 
-resource "google_compute_disk" "default" {
+/*resource "google_compute_disk" "default" {
   name = "reddit-mongo-disk"
   zone = "${var.zone}"
   size = 25
   labels = {
     environment = "dev"
   }
-}
+}*/
 
 resource "google_container_cluster" "primary" {
   name               = "my-cluster"
   location           = "${var.zone}"
-  initial_node_count = 3
+  enable_legacy_abac = true
+  initial_node_count = 2
 
   master_auth {
     username = ""
@@ -44,6 +45,23 @@ resource "google_container_cluster" "primary" {
 
   node_config {
     machine_type = "g1-small"
+    disk_size_gb = 20
+
+    metadata = {
+      disable-legacy-endpoints = "true"
+    }
+  }
+}
+
+resource "google_container_node_pool" "another_primary_nodes" {
+  name       = "bigpool"
+  location   = "${var.zone}"
+  cluster    = "${google_container_cluster.primary.name}"
+  node_count = 1
+
+  node_config {
+    #preemptible  = true
+    machine_type = "n1-standard-2"
     disk_size_gb = 20
 
     metadata = {

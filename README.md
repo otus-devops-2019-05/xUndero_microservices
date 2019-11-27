@@ -1,4 +1,9 @@
 # xUndero_microservices [![Build Status](https://travis-ci.com/otus-devops-2019-05/xUndero_microservices.svg?branch=master)](https://travis-ci.com/otus-devops-2019-05/xUndero_microservices)
+## ДЗ 22 kubernetes-4
+1. #### Работа с Helm;                       
+2. #### Установка Gitlab в k8s;
+3. #### Запуск CI/CD в k8s;
+
 ## ДЗ 21 kubernetes-3
 1. #### Изучение сетевого взаимодействия k8s:
   * Service (ClusterIP, NodePort, LoadBalanser);
