@@ -1,0 +1,18 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ template "ui.fullname" . }}
+  annotations:
+     kubernetes.io/ingress.class: "gce"
+#    kubernetes.io/ingress.allow-http: "false"
+spec:
+#  tls:
+#  - secretName: ui-ingress
+  rules:
+  - http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: {{ template "ui.fullname" . }}
+          servicePort: {{ .Values.service.externalPort }}
